@@ -7,9 +7,10 @@ namespace TestsFacturation
     [TestClass]
     public class FactureTest
     {
-        // Références utilisées dans les tests
+        // R?f?rences utilis?es dans les tests
         private Facture facture;
         private Item itemTest;
+        private ControleurVente controleurVente;
 
         [TestInitialize]
         public void InitialisationTests()
@@ -21,7 +22,7 @@ namespace TestsFacturation
         [TestCleanup]
         public void NettoyageTests()
         {
-            // On remet les objets dans un état d'origine
+            // On remet les objets dans un ?tat d'origine
         }
 
         [TestMethod]
@@ -35,10 +36,19 @@ namespace TestsFacturation
         [TestMethod]
         public void TestAjoutItemMultiple()
         {
-            // On ajoute plusieurs fois le même item
+            // On ajoute plusieurs fois le m?me item
             facture.AjouterItem(itemTest, 1);
             facture.AjouterItem(itemTest, 2);
             Assert.AreEqual(3, facture.ContenuFacture[itemTest]);
+        }
+
+        [TestMethod]
+        public void TestCalculTaxe()
+        {
+            // On ajoute plusieurs fois le m?me item
+            facture.AjouterItem(itemTest, 1);
+            facture.AjouterItem(itemTest, 2);
+            Assert.AreEqual(11.5, controleurVente.ConclureFacture());
         }
     }
 }
