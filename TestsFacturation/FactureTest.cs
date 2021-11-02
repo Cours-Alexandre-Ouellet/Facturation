@@ -40,5 +40,30 @@ namespace TestsFacturation
             facture.AjouterItem(itemTest, 2);
             Assert.AreEqual(3, facture.ContenuFacture[itemTest]);
         }
+
+        [TestMethod]
+        public void TestGetItemsTaxables()
+        {
+            int value = 0;
+
+            var itemIncluded = new Item(56.56f, "Inclus", null);
+            var itemExcluded = new Item(56.56f, "Inclus", new string[1] { "Exclus" });
+
+            facture.AjouterItem(itemIncluded, 2);
+            facture.AjouterItem(itemExcluded, 56);
+
+            var liste = facture.GetItemsTaxables("Exclus");
+
+            //Vérifie si l'item à exclure a été exclu
+            liste.TryGetValue(itemExcluded, out value);
+            Assert.AreEqual(0, value);
+
+            value = 0;
+
+            //Vérifie si l'item à garder a été trouvé
+            liste.TryGetValue(itemIncluded, out value);
+            Assert.AreNotEqual(0, value);
+
+        }
     }
 }
