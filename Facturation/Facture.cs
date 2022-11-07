@@ -29,6 +29,11 @@ namespace Facturation
         private bool estClose;
 
         /// <summary>
+        /// Employé qui effectue la vente
+        /// </summary>
+        public Employe Employe { get; private set; }
+
+        /// <summary>
         /// Retourne la valeur totale de la facture
         /// </summary>
         public float Total
@@ -55,12 +60,14 @@ namespace Facturation
         /// Crée une nouvelle facture à une date déterminée.
         /// </summary>
         /// <param name="dateCreation">La date à laquelle la facture est créée</param>
-        public Facture(DateTime dateCreation)
+        /// <param name="employe">Employe effectuant la vente</param>
+        public Facture(DateTime dateCreation, Employe employe)
         {
             Id = -1;
             ContenuFacture = new Dictionary<Item, int>();
             this.DateCreation = dateCreation;
             estClose = false;
+            Employe = employe;
         }
 
         /// <summary>

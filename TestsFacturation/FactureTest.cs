@@ -14,7 +14,8 @@ namespace TestsFacturation
         [TestInitialize]
         public void InitialisationTests()
         {
-            facture = new Facture(DateTime.Now);
+            Employe employe = new Employe("Yvan", "Dubois", "D007");
+            facture = new Facture(DateTime.Now, employe);
             itemTest = new Item(5f, "Test", null);
         }
 
